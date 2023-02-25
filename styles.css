@@ -1,0 +1,25 @@
+body {
+  font-family: "Arial";
+}
+
+.centered {
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.container .col1 {
+  width: 100 / 3;
+}
+
+.container .col2 {
+  width: 100 / 3;
+}
+
+.container .col3 {
+  width: 100 / 3;
+}
