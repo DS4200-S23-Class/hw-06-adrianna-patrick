@@ -3,37 +3,37 @@ const FRAME_WIDTH = 400;
 const MARGINS = { left: 50, right: 50, top: 50, bottom: 50 };
 
 // frame
-var scatter1 = d3
+let scatter1 = d3
   .select("#scatter1")
   .append("svg")
   .attr("height", FRAME_HEIGHT)
   .attr("width", FRAME_WIDTH)
   .attr("class", "frame");
 
-var scatter2 = d3
+let scatter2 = d3
   .select("#scatter2")
   .append("svg")
   .attr("height", FRAME_HEIGHT)
   .attr("width", FRAME_WIDTH)
   .attr("class", "frame");
 
-var plot_width = FRAME_WIDTH - MARGINS.left - MARGINS.right;
-var plot_height = FRAME_HEIGHT - MARGINS.top - MARGINS.bottom;
+let plot_width = FRAME_WIDTH - MARGINS.left - MARGINS.right;
+let plot_height = FRAME_HEIGHT - MARGINS.top - MARGINS.bottom;
 
-var bar_x = d3.scaleBand()
+let bar_x = d3.scaleBand()
   .range([0, plot_width])
   .padding(0.1);
-var bar_y = d3.scaleLinear()
+let bar_y = d3.scaleLinear()
   .range([plot_height, 0]);
 
-var bar_svg = d3.select("#bar").append("svg")
+let bar_svg = d3.select("#bar").append("svg")
     .attr("width", plot_width + MARGINS.left + MARGINS.right)
     .attr("height", plot_height + MARGINS.top + MARGINS.bottom)
     .append("g")
     .attr("transform", "translate(" + MARGINS.left + "," + MARGINS.top + ")");
 
 function isBrushed(brush_coords, cx, cy) {
-  var x0 = brush_coords[0][0],
+  let x0 = brush_coords[0][0],
       x1 = brush_coords[1][0],
       y0 = brush_coords[0][1],
       y1 = brush_coords[1][1];
@@ -43,27 +43,27 @@ function isBrushed(brush_coords, cx, cy) {
 // reading in data
 d3.csv("data/iris.csv").then((data) => {
 
-  var brushedDots = []  
+  let brushedDots = []  
 
-  var attribut1 = "Sepal_Length";
-  var attribut2 = "Petal_Length";
+  let attribut1 = "Sepal_Length";
+  let attribut2 = "Petal_Length";
 
-  var attribut3 = "Sepal_Width";
-  var attribut4 = "Petal_Width";
+  let attribut3 = "Sepal_Width";
+  let attribut4 = "Petal_Width";
 
-  var color = d3.scaleOrdinal()
+  let color = d3.scaleOrdinal()
       .range(["red", "green", "blue"]);
     
-  var scalex_plot1 = d3.scaleLinear().domain(d3.extent(data, function(d){return d[attribut1]})).range([MARGINS.left, plot_width]);
+  let scalex_plot1 = d3.scaleLinear().domain(d3.extent(data, function(d){return d[attribut1]})).range([MARGINS.left, plot_width]);
 
-  var scaley_plot1 = d3.scaleLinear().domain(d3.extent(data, function(d){return d[attribut2]})).range([plot_height, MARGINS.top]);
+  let scaley_plot1 = d3.scaleLinear().domain(d3.extent(data, function(d){return d[attribut2]})).range([plot_height, MARGINS.top]);
 
-  var scalex_plot2 = d3.scaleLinear().domain(d3.extent(data, function(d){return d[attribut3]})).range([MARGINS.left, plot_width]);
+  let scalex_plot2 = d3.scaleLinear().domain(d3.extent(data, function(d){return d[attribut3]})).range([MARGINS.left, plot_width]);
 
-  var scaley_plot2 = d3.scaleLinear().domain(d3.extent(data, function(d){return d[attribut4]})).range([plot_height, MARGINS.top]);
+  let scaley_plot2 = d3.scaleLinear().domain(d3.extent(data, function(d){return d[attribut4]})).range([plot_height, MARGINS.top]);
 
 
-  var brush = d3.brush()
+  let brush = d3.brush()
     .extent([
       [d3.min(scalex_plot2.range()) - 50, d3.min(scaley_plot2.range()) - 50],
       [d3.max(scalex_plot2.range()) + 50, d3.max(scaley_plot2.range()) + 50]
@@ -130,7 +130,7 @@ d3.csv("data/iris.csv").then((data) => {
       } 
     })
 
-  var g_plot1 = scatter1.append("g")
+  let g_plot1 = scatter1.append("g")
     .attr("transform", "translate(" + 50 + "," + 50 + ")");
 
   g_plot1.append("g")
@@ -140,7 +140,7 @@ d3.csv("data/iris.csv").then((data) => {
   g_plot1.append("g")
   .call(d3.axisLeft(scaley_plot1));
 
-  var g_plot2 = scatter2.append("g")
+  let g_plot2 = scatter2.append("g")
   .attr("transform", "translate(" + 50 + "," + 50 + ")")
   .call(brush);
 
@@ -194,10 +194,10 @@ scatter2.append("text")
   .style("text-decoration", "underline")  
   .text("Petal Width vs Sepal Width");
 
-  var countObj = {};
+  let countObj = {};
 
   data.forEach(function(d) {
-      var species = d.Species;
+      let species = d.Species;
       if(countObj[species] === undefined) {
           countObj[species] = 1;
       } else {
@@ -206,7 +206,7 @@ scatter2.append("text")
   });
 
   data.forEach(function(d) {
-      var species = d.Species;
+      let species = d.Species;
       d.count = countObj[species];
   });
 
