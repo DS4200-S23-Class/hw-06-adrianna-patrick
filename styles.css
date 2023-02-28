@@ -1,7 +1,7 @@
 .selected {
   opacity: 1 !important;
-  stroke: black;
-  stroke-width: 1px;
+  stroke: orange;
+  stroke-width: 2px;
 }
 
 body {

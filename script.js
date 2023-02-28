@@ -45,22 +45,22 @@ d3.csv("data/iris.csv").then((data) => {
 
   var brushedDots = []  
 
-  let attribut1 = "Sepal_Length";
-  let attribut2 = "Petal_Length";
+  var attribut1 = "Sepal_Length";
+  var attribut2 = "Petal_Length";
 
-  let attribut3 = "Sepal_Width";
-  let attribut4 = "Petal_Width";
+  var attribut3 = "Sepal_Width";
+  var attribut4 = "Petal_Width";
 
-  let color = d3.scaleOrdinal()
+  var color = d3.scaleOrdinal()
       .range(["red", "green", "blue"]);
     
-  let scalex_plot1 = d3.scaleLinear().domain(d3.extent(data, function(d){return d[attribut1]})).range([MARGINS.left, plot_width]);
+  var scalex_plot1 = d3.scaleLinear().domain(d3.extent(data, function(d){return d[attribut1]})).range([MARGINS.left, plot_width]);
 
-  let scaley_plot1 = d3.scaleLinear().domain(d3.extent(data, function(d){return d[attribut2]})).range([plot_height, MARGINS.top]);
+  var scaley_plot1 = d3.scaleLinear().domain(d3.extent(data, function(d){return d[attribut2]})).range([plot_height, MARGINS.top]);
 
-  let scalex_plot2 = d3.scaleLinear().domain(d3.extent(data, function(d){return d[attribut3]})).range([MARGINS.left, plot_width]);
+  var scalex_plot2 = d3.scaleLinear().domain(d3.extent(data, function(d){return d[attribut3]})).range([MARGINS.left, plot_width]);
 
-  let scaley_plot2 = d3.scaleLinear().domain(d3.extent(data, function(d){return d[attribut4]})).range([plot_height, MARGINS.top]);
+  var scaley_plot2 = d3.scaleLinear().domain(d3.extent(data, function(d){return d[attribut4]})).range([plot_height, MARGINS.top]);
 
 
   var brush = d3.brush()
@@ -87,6 +87,13 @@ d3.csv("data/iris.csv").then((data) => {
           } else {
             return "0.5";
           }
+        })
+        .classed("selected", function(d) {
+          if (brushedDots.includes(d.id)) {
+            return true;
+          } else {
+            return false;
+          }
         });
 
         scatter1.selectAll("circle")
@@ -95,6 +102,13 @@ d3.csv("data/iris.csv").then((data) => {
             return "1.0";
           } else {
             return "0.5";
+          }
+        })
+        .classed("selected", function(d) {
+          if (brushedDots.includes(d.id)) {
+            return true;
+          } else {
+            return false;
           }
         });
 
@@ -105,11 +119,18 @@ d3.csv("data/iris.csv").then((data) => {
           } else {
             return "0.02";
           }
+        })
+        .classed("selected", function(d) {
+          if (brushedDots.includes(d.id)) {
+            return true;
+          } else {
+            return false;
+          }
         });
       } 
     })
 
-  let g_plot1 = scatter1.append("g")
+  var g_plot1 = scatter1.append("g")
     .attr("transform", "translate(" + 50 + "," + 50 + ")");
 
   g_plot1.append("g")
@@ -119,7 +140,7 @@ d3.csv("data/iris.csv").then((data) => {
   g_plot1.append("g")
   .call(d3.axisLeft(scaley_plot1));
 
-  let g_plot2 = scatter2.append("g")
+  var g_plot2 = scatter2.append("g")
   .attr("transform", "translate(" + 50 + "," + 50 + ")")
   .call(brush);
 
