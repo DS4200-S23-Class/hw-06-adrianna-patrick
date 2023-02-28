@@ -1,3 +1,9 @@
+.selected {
+  opacity: 1 !important;
+  stroke: black;
+  stroke-width: 1px;
+}
+
 body {
   font-family: "Arial";
 }
